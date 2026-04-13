@@ -32,12 +32,13 @@ button {
   margin: 0 auto 24px;
 }
 
-/* Your page content */
+/* Page container */
 .page {
   background: #111;
   overflow: hidden;
 }
 
+/* Images */
 .page img {
   width: calc(100% + 2px);
   height: calc(100% + 2px);
@@ -47,7 +48,12 @@ button {
   object-fit: cover;
 }
 
-/* StPageFlip internals */
+/* Dummy black pages */
+.dummy-page {
+  background: #000;
+}
+
+/* Remove internal library artifacts */
 .stf__parent {
   margin: 0 auto !important;
 }
