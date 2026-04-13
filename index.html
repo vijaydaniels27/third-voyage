@@ -6,7 +6,6 @@
   <title>The Third Voyage</title>
 
   <link rel="stylesheet" href="style.css">
-
   <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
 </head>
 
@@ -20,37 +19,40 @@
 </div>
 
 <div id="book">
-
-  <!-- Pages -->
-  <div class="page"><img src="pages/page1.jpg"></div>
-  <div class="page"><img src="pages/page2.jpg"></div>
-  <div class="page"><img src="pages/page3.jpg"></div>
-  <div class="page"><img src="pages/page4.jpg"></div>
-  <div class="page"><img src="pages/page5.jpg"></div>
-  <div class="page"><img src="pages/page6.jpg"></div>
-  <div class="page"><img src="pages/page7.jpg"></div>
-  <div class="page"><img src="pages/page8.jpg"></div>
-  <div class="page"><img src="pages/page9.jpg"></div>
-  <div class="page"><img src="pages/page10.jpg"></div>
-  <div class="page"><img src="pages/page11.jpg"></div>
-  <div class="page"><img src="pages/page12.jpg"></div>
-  <div class="page"><img src="pages/page13.jpg"></div>
-  <div class="page"><img src="pages/page14.jpg"></div>
-  <div class="page"><img src="pages/page15.jpg"></div>
-  <div class="page"><img src="pages/page16.jpg"></div>
-  <div class="page"><img src="pages/page17.jpg"></div>
-  <div class="page"><img src="pages/page18.jpg"></div>
-
+  <div class="page"><img src="pages/page1.jpg" alt="Page 1"></div>
+  <div class="page"><img src="pages/page2.jpg" alt="Page 2"></div>
+  <div class="page"><img src="pages/page3.jpg" alt="Page 3"></div>
+  <div class="page"><img src="pages/page4.jpg" alt="Page 4"></div>
+  <div class="page"><img src="pages/page5.jpg" alt="Page 5"></div>
+  <div class="page"><img src="pages/page6.jpg" alt="Page 6"></div>
+  <div class="page"><img src="pages/page7.jpg" alt="Page 7"></div>
+  <div class="page"><img src="pages/page8.jpg" alt="Page 8"></div>
+  <div class="page"><img src="pages/page9.jpg" alt="Page 9"></div>
+  <div class="page"><img src="pages/page10.jpg" alt="Page 10"></div>
+  <div class="page"><img src="pages/page11.jpg" alt="Page 11"></div>
+  <div class="page"><img src="pages/page12.jpg" alt="Page 12"></div>
+  <div class="page"><img src="pages/page13.jpg" alt="Page 13"></div>
+  <div class="page"><img src="pages/page14.jpg" alt="Page 14"></div>
+  <div class="page"><img src="pages/page15.jpg" alt="Page 15"></div>
+  <div class="page"><img src="pages/page16.jpg" alt="Page 16"></div>
+  <div class="page"><img src="pages/page17.jpg" alt="Page 17"></div>
+  <div class="page"><img src="pages/page18.jpg" alt="Page 18"></div>
 </div>
 
 <script>
   const pageFlip = new St.PageFlip(document.getElementById("book"), {
-    width: 500,
-    height: 700,
+    width: 512,
+    height: 512,
     size: "stretch",
-    maxShadowOpacity: 0.5,
+    minWidth: 250,
+    maxWidth: 1100,
+    minHeight: 250,
+    maxHeight: 1100,
+    maxShadowOpacity: 0.25,
     showCover: true,
     mobileScrollSupport: false,
+    usePortrait: true,
+    autoSize: true,
     flippingTime: 900
   });
 
