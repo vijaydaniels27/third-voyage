@@ -45,35 +45,44 @@
     <!-- Closing spread -->
     <div class="page dummy-page"></div>
   </div>
-
+<audio id="flipSound" src="page-flip.mp3" preload="auto"></audio>
   <script>
-    const pageFlip = new St.PageFlip(document.getElementById("book"), {
-      width: 512,
-      height: 512,
-      size: "stretch",
-      minWidth: 250,
-      maxWidth: 1100,
-      minHeight: 250,
-      maxHeight: 1100,
-      drawShadow: false,
-      maxShadowOpacity: 0,
-      showCover: false,
-      mobileScrollSupport: false,
-      usePortrait: true,
-      autoSize: true,
-      flippingTime: 700
-    });
+  const pageFlip = new St.PageFlip(document.getElementById("book"), {
+    width: 512,
+    height: 512,
+    size: "stretch",
+    minWidth: 250,
+    maxWidth: 1100,
+    minHeight: 250,
+    maxHeight: 1100,
+    drawShadow: false,
+    maxShadowOpacity: 0,
+    showCover: false,
+    mobileScrollSupport: false,
+    usePortrait: true,
+    autoSize: true,
+    flippingTime: 700
+  });
 
-    pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+  pageFlip.loadFromHTML(document.querySelectorAll(".page"));
 
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      pageFlip.flipNext("top");
-    });
+  const sound = document.getElementById("flipSound");
 
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      pageFlip.flipPrev("top");
-    });
-  </script>
+  function playFlip() {
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  document.getElementById("nextBtn").addEventListener("click", () => {
+    pageFlip.flipNext("top");
+    playFlip();
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", () => {
+    pageFlip.flipPrev("top");
+    playFlip();
+  });
+</script>
 
 </body>
 </html>
