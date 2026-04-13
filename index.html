@@ -19,7 +19,7 @@
   </div>
 
   <div id="book">
-    <div class="page"><img src="pages/page1.jpg" alt="Page 1"></div>
+    <div class="page" data-density="hard"><img src="pages/page1.jpg" alt="Page 1"></div>
     <div class="page"><img src="pages/page2.jpg" alt="Page 2"></div>
     <div class="page"><img src="pages/page3.jpg" alt="Page 3"></div>
     <div class="page"><img src="pages/page4.jpg" alt="Page 4"></div>
@@ -36,7 +36,7 @@
     <div class="page"><img src="pages/page15.jpg" alt="Page 15"></div>
     <div class="page"><img src="pages/page16.jpg" alt="Page 16"></div>
     <div class="page"><img src="pages/page17.jpg" alt="Page 17"></div>
-    <div class="page"><img src="pages/page18.jpg" alt="Page 18"></div>
+    <div class="page" data-density="hard"><img src="pages/page18.jpg" alt="Page 18"></div>
   </div>
 
   <script>
@@ -54,30 +54,17 @@
       mobileScrollSupport: false,
       usePortrait: true,
       autoSize: true,
-      flippingTime: 900
+      flippingTime: 700
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page"));
 
     document.getElementById("nextBtn").addEventListener("click", () => {
-      const current = pageFlip.getCurrentPageIndex();
-
-      if (current === 0) {
-        pageFlip.turnToNextPage();
-      } else {
-        pageFlip.flipNext();
-      }
+      pageFlip.flipNext("top");
     });
 
     document.getElementById("prevBtn").addEventListener("click", () => {
-      const current = pageFlip.getCurrentPageIndex();
-      const last = pageFlip.getPageCount() - 1;
-
-      if (current === last) {
-        pageFlip.turnToPrevPage();
-      } else {
-        pageFlip.flipPrev();
-      }
+      pageFlip.flipPrev("top");
     });
   </script>
 
