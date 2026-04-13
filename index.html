@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Third Voyage</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+</head>
+
+<body>
+
+<h1>Voyages in Destiny – The Third Voyage</h1>
+
+<div class="controls">
+  <button onclick="pageFlip.flipPrev()">◀ Prev</button>
+  <button onclick="pageFlip.flipNext()">Next ▶</button>
+</div>
+
+<div id="book">
+
+  <!-- Pages -->
+  <div class="page"><img src="pages/page1.jpg"></div>
+  <div class="page"><img src="pages/page2.jpg"></div>
+  <div class="page"><img src="pages/page3.jpg"></div>
+  <div class="page"><img src="pages/page4.jpg"></div>
+  <div class="page"><img src="pages/page5.jpg"></div>
+  <div class="page"><img src="pages/page6.jpg"></div>
+  <div class="page"><img src="pages/page7.jpg"></div>
+  <div class="page"><img src="pages/page8.jpg"></div>
+  <div class="page"><img src="pages/page9.jpg"></div>
+  <div class="page"><img src="pages/page10.jpg"></div>
+  <div class="page"><img src="pages/page11.jpg"></div>
+  <div class="page"><img src="pages/page12.jpg"></div>
+  <div class="page"><img src="pages/page13.jpg"></div>
+  <div class="page"><img src="pages/page14.jpg"></div>
+  <div class="page"><img src="pages/page15.jpg"></div>
+  <div class="page"><img src="pages/page16.jpg"></div>
+  <div class="page"><img src="pages/page17.jpg"></div>
+  <div class="page"><img src="pages/page18.jpg"></div>
+
+</div>
+
+<script>
+  const pageFlip = new St.PageFlip(document.getElementById("book"), {
+    width: 500,
+    height: 700,
+    size: "stretch",
+    maxShadowOpacity: 0.5,
+    showCover: true,
+    mobileScrollSupport: false,
+    flippingTime: 900
+  });
+
+  pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+</script>
+
+</body>
+</html>
