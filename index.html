@@ -82,6 +82,18 @@
     });
   }
 
+  let flipSoundLock = false;
+
+  function triggerFlipSound() {
+    if (flipSoundLock) return;
+    flipSoundLock = true;
+    playFlip();
+
+    setTimeout(() => {
+      flipSoundLock = false;
+    }, 250);
+  }
+
   // Only initialize the flipbook on non-phone screens
   if (window.innerWidth > 700) {
     const pageFlip = new St.PageFlip(document.getElementById("book"), {
@@ -106,15 +118,19 @@
     pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
 
     document.getElementById("nextBtn").addEventListener("click", () => {
+      triggerFlipSound();
       pageFlip.flipNext("top");
     });
 
     document.getElementById("prevBtn").addEventListener("click", () => {
+      triggerFlipSound();
       pageFlip.flipPrev("top");
     });
 
-    pageFlip.on("flip", () => {
-      playFlip();
+    pageFlip.on("changeState", (e) => {
+      if (e.data === "flipping") {
+        triggerFlipSound();
+      }
     });
   }
 </script>
