@@ -71,55 +71,53 @@
   </audio>
 
   <script>
-    const sound = document.getElementById("flipSound");
+  const sound = document.getElementById("flipSound");
 
-    function playFlip() {
-      if (!sound) return;
-      sound.pause();
-      sound.currentTime = 0;
-      sound.play().catch((err) => {
-        console.log("Flip sound failed:", err);
-      });
-    }
+  function playFlip() {
+    if (!sound) return;
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play().catch((err) => {
+      console.log("Flip sound failed:", err);
+    });
+  }
 
-    // Only initialize the flipbook on non-phone screens
-    if (window.innerWidth > 700) {
-      const pageFlip = new St.PageFlip(document.getElementById("book"), {
-        width: 512,
-        height: 512,
-        size: "stretch",
-        minWidth: 250,
-        maxWidth: 1100,
-        minHeight: 250,
-        maxHeight: 1100,
-        drawShadow: false,
-        maxShadowOpacity: 0,
-        showCover: false,
-        mobileScrollSupport: true,
-        usePortrait: true,
-        autoSize: true,
-        flippingTime: 700,
-        useMouseEvents: true,
-        disableFlipByClick: false
-      });
+  // Only initialize the flipbook on non-phone screens
+  if (window.innerWidth > 700) {
+    const pageFlip = new St.PageFlip(document.getElementById("book"), {
+      width: 512,
+      height: 512,
+      size: "stretch",
+      minWidth: 250,
+      maxWidth: 1100,
+      minHeight: 250,
+      maxHeight: 1100,
+      drawShadow: false,
+      maxShadowOpacity: 0,
+      showCover: false,
+      mobileScrollSupport: true,
+      usePortrait: true,
+      autoSize: true,
+      flippingTime: 700,
+      useMouseEvents: true,
+      disableFlipByClick: false
+    });
 
-      pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
+    pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
 
-      document.getElementById("nextBtn").addEventListener("click", () => {
-        pageFlip.flipNext("top");
-        playFlip();
-      });
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      pageFlip.flipNext("top");
+    });
 
-      document.getElementById("prevBtn").addEventListener("click", () => {
-        pageFlip.flipPrev("top");
-        playFlip();
-      });
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      pageFlip.flipPrev("top");
+    });
 
-      pageFlip.on("flip", () => {
-        playFlip();
-      });
-    }
-  </script>
+    pageFlip.on("flip", () => {
+      playFlip();
+    });
+  }
+</script>
 
 </body>
 </html>
