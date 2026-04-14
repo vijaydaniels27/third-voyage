@@ -18,7 +18,7 @@
     <button id="nextBtn">Next ▶</button>
   </div>
 
-  <!-- Desktop / tablet flipbook -->
+  <!-- Flipbook (desktop/tablet) -->
   <div id="book">
     <div class="page dummy-page"></div>
     <div class="page"><img src="pages/page1.jpg" alt="Front cover"></div>
@@ -46,94 +46,91 @@
 
   <!-- Mobile fallback -->
   <div id="mobilePages">
-    <img src="pages/page1.jpg" alt="Page 1">
-    <img src="pages/page2.jpg" alt="Page 2">
-    <img src="pages/page3.jpg" alt="Page 3">
-    <img src="pages/page4.jpg" alt="Page 4">
-    <img src="pages/page5.jpg" alt="Page 5">
-    <img src="pages/page6.jpg" alt="Page 6">
-    <img src="pages/page7.jpg" alt="Page 7">
-    <img src="pages/page8.jpg" alt="Page 8">
-    <img src="pages/page9.jpg" alt="Page 9">
-    <img src="pages/page10.jpg" alt="Page 10">
-    <img src="pages/page11.jpg" alt="Page 11">
-    <img src="pages/page12.jpg" alt="Page 12">
-    <img src="pages/page13.jpg" alt="Page 13">
-    <img src="pages/page14.jpg" alt="Page 14">
-    <img src="pages/page15.jpg" alt="Page 15">
-    <img src="pages/page16.jpg" alt="Page 16">
-    <img src="pages/page17.jpg" alt="Page 17">
-    <img src="pages/page18.jpg" alt="Page 18">
+    <img src="pages/page1.jpg">
+    <img src="pages/page2.jpg">
+    <img src="pages/page3.jpg">
+    <img src="pages/page4.jpg">
+    <img src="pages/page5.jpg">
+    <img src="pages/page6.jpg">
+    <img src="pages/page7.jpg">
+    <img src="pages/page8.jpg">
+    <img src="pages/page9.jpg">
+    <img src="pages/page10.jpg">
+    <img src="pages/page11.jpg">
+    <img src="pages/page12.jpg">
+    <img src="pages/page13.jpg">
+    <img src="pages/page14.jpg">
+    <img src="pages/page15.jpg">
+    <img src="pages/page16.jpg">
+    <img src="pages/page17.jpg">
+    <img src="pages/page18.jpg">
   </div>
 
+  <!-- Sound -->
   <audio id="flipSound" preload="auto">
     <source src="page-flip.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-  const sound = document.getElementById("flipSound");
+    const sound = document.getElementById("flipSound");
 
-  function playFlip() {
-    if (!sound) return;
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play().catch((err) => {
-      console.log("Flip sound failed:", err);
-    });
-  }
+    function playFlip() {
+      if (!sound) return;
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play().catch(() => {});
+    }
 
-  let flipSoundLock = false;
+    let lastFlipSoundTime = 0;
 
-  function triggerFlipSound() {
-    if (flipSoundLock) return;
-    flipSoundLock = true;
-    playFlip();
+    function triggerFlipSound() {
+      const now = Date.now();
+      if (now - lastFlipSoundTime < 300) return;
+      lastFlipSoundTime = now;
+      playFlip();
+    }
 
-    setTimeout(() => {
-      flipSoundLock = false;
-    }, 250);
-  }
+    // Only initialize flipbook on larger screens
+    if (window.innerWidth > 700) {
+      const bookElement = document.getElementById("book");
 
-  // Only initialize the flipbook on non-phone screens
-  if (window.innerWidth > 700) {
-    const pageFlip = new St.PageFlip(document.getElementById("book"), {
-      width: 512,
-      height: 512,
-      size: "stretch",
-      minWidth: 250,
-      maxWidth: 1100,
-      minHeight: 250,
-      maxHeight: 1100,
-      drawShadow: false,
-      maxShadowOpacity: 0,
-      showCover: false,
-      mobileScrollSupport: true,
-      usePortrait: true,
-      autoSize: true,
-      flippingTime: 700,
-      useMouseEvents: true,
-      disableFlipByClick: false
-    });
+      const pageFlip = new St.PageFlip(bookElement, {
+        width: 512,
+        height: 512,
+        size: "stretch",
+        minWidth: 250,
+        maxWidth: 1100,
+        minHeight: 250,
+        maxHeight: 1100,
+        drawShadow: false,
+        maxShadowOpacity: 0,
+        showCover: false,
+        mobileScrollSupport: true,
+        usePortrait: true,
+        autoSize: true,
+        flippingTime: 700,
+        useMouseEvents: true,
+        disableFlipByClick: false
+      });
 
-    pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
+      pageFlip.loadFromHTML(document.querySelectorAll("#book .page"));
 
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      triggerFlipSound();
-      pageFlip.flipNext("top");
-    });
-
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      triggerFlipSound();
-      pageFlip.flipPrev("top");
-    });
-
-    pageFlip.on("changeState", (e) => {
-      if (e.data === "flipping") {
+      document.getElementById("nextBtn").addEventListener("click", () => {
         triggerFlipSound();
-      }
-    });
-  }
-</script>
+        pageFlip.flipNext("top");
+      });
+
+      document.getElementById("prevBtn").addEventListener("click", () => {
+        triggerFlipSound();
+        pageFlip.flipPrev("top");
+      });
+
+      // Trigger sound when user starts dragging a page
+      bookElement.addEventListener("pointerdown", () => {
+        triggerFlipSound();
+      });
+    }
+  </script>
 
 </body>
 </html>
